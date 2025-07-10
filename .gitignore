@@ -173,6 +173,7 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# Spam detection data and models
+# Email spam detection data and models
 data/
 models/
+*.tar.bz2
