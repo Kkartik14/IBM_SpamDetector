@@ -1,14 +1,15 @@
-# Spam Detection System
+# Email Spam Detection System
 
-A machine learning-powered spam detection system built with Python and Gradio. This system uses a Naive Bayes classifier to identify spam messages with high accuracy.
+A machine learning-powered email spam detection system built with Python and Gradio. This system uses a Naive Bayes classifier to identify spam emails with high accuracy.
 
 ## Features
 
 - **Machine Learning Model**: Naive Bayes classifier with TF-IDF vectorization
 - **Web Interface**: Clean and intuitive Gradio-based UI
-- **High Accuracy**: Achieves 95%+ accuracy on SMS spam detection
-- **Automatic Dataset**: Downloads and processes the SMS Spam Collection dataset
+- **High Accuracy**: Achieves 95%+ accuracy on email spam detection
+- **Automatic Dataset**: Downloads and processes the SpamAssassin email corpus
 - **Real-time Predictions**: Instant spam/ham classification with confidence scores
+- **Email Parsing**: Handles both subject lines and email body content
 
 ## Project Structure
 
@@ -39,17 +40,18 @@ test-pr-reviewer/
 
 ### Step 1: Train the Model
 
-Run the training script to download the dataset and train the spam detection model:
+Run the training script to download the dataset and train the email spam detection model:
 
 ```bash
 python train_model.py
 ```
 
 This will:
-- Download the SMS Spam Collection dataset from UCI repository
-- Preprocess the text data
+- Download the SpamAssassin email corpus (ham and spam emails)
+- Parse email headers and content
+- Preprocess the email text data
 - Train a Naive Bayes classifier
-- Save the trained model to `models/spam_model.pkl`
+- Save the trained model to `models/email_spam_model.pkl`
 
 ### Step 2: Launch the Web Interface
 
@@ -65,16 +67,23 @@ The web interface will be available at `http://localhost:7860`
 
 ### Machine Learning Pipeline
 
-1. **Data Preprocessing**
+1. **Email Parsing**
+   - Extract subject lines and email body
+   - Handle multipart email messages
+   - Parse both plain text and HTML content
+
+2. **Data Preprocessing**
    - Convert text to lowercase
+   - Remove URLs and email addresses
    - Remove special characters and numbers
    - Normalize whitespace
 
-2. **Feature Extraction**
-   - TF-IDF vectorization with 3000 max features
+3. **Feature Extraction**
+   - TF-IDF vectorization with 5000 max features
    - English stop words removal
+   - Document frequency filtering
 
-3. **Model Training**
+4. **Model Training**
    - Multinomial Naive Bayes classifier
    - 80/20 train/test split
    - Stratified sampling to maintain class balance
@@ -82,18 +91,33 @@ The web interface will be available at `http://localhost:7860`
 ### Model Performance
 
 - **Accuracy**: ~97%
-- **Dataset**: 5,574 SMS messages
-- **Classes**: Spam (13.4%) and Ham (86.6%)
+- **Dataset**: ~4,000+ email messages
+- **Classes**: Spam and Ham (legitimate emails)
+- **Features**: Subject lines + email body content
 
 ## Example Usage
 
-### Spam Examples:
-- "Congratulations! You've won $1000! Click here to claim your prize now!"
-- "URGENT: Your account will be suspended. Call this number immediately"
+### Spam Email Example:
+```
+Subject: URGENT: Claim your $1,000,000 prize!
 
-### Ham Examples:
-- "Hey, are we still meeting for lunch tomorrow?"
-- "The meeting has been moved to 3 PM in conference room B"
+Congratulations! You have been selected as a winner in our international lottery!
+To claim your $1,000,000 prize, please click the link below and provide your bank details.
+This offer expires in 24 hours!
+```
+
+### Ham Email Example:
+```
+Subject: Meeting rescheduled to Friday
+
+Hi team,
+
+I need to reschedule our weekly meeting from Thursday to Friday at 3 PM.
+Please let me know if this works for everyone.
+
+Best regards,
+John
+```
 
 ## Technical Details
 
@@ -105,24 +129,24 @@ The web interface will be available at `http://localhost:7860`
 
 ### Model Architecture
 - **Algorithm**: Multinomial Naive Bayes
-- **Vectorizer**: TF-IDF with 3000 features
-- **Preprocessing**: Text normalization and cleaning
+- **Vectorizer**: TF-IDF with 5000 features
+- **Preprocessing**: Email parsing and text normalization
 - **Storage**: Pickle serialization
 
 ## Dataset
 
-The system uses the [SMS Spam Collection Dataset](https://archive.ics.uci.edu/ml/datasets/sms+spam+collection) from UCI Machine Learning Repository:
+The system uses the [SpamAssassin Public Corpus](https://spamassassin.apache.org/old/publiccorpus/):
 
-- **Source**: SMS Spam Collection v.1
-- **Size**: 5,574 messages
-- **Format**: Tab-separated values (label, message)
+- **Source**: SpamAssassin email corpus
+- **Content**: Real email messages
+- **Format**: Raw email files with headers
 - **License**: Public domain
 
 ## Development Timeline
 
-- **June 20, 2024**: Initial model training and dependencies
-- **July 8, 2024**: Web interface implementation
-- **Today**: Documentation and README
+- **June 20, 2025**: Initial model training and dependencies
+- **July 8, 2025**: Web interface implementation
+- **August 15, 2025**: Updated to email spam detection
 
 ## Contributing
 
@@ -138,6 +162,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgments
 
-- UCI Machine Learning Repository for the SMS Spam Collection dataset
+- SpamAssassin team for the email corpus dataset
 - Gradio team for the excellent web interface framework
 - Scikit-learn community for machine learning tools
