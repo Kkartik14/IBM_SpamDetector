@@ -27,8 +27,8 @@ test-pr-reviewer/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Kkartik14/test-pr-reviewer.git
-   cd test-pr-reviewer
+   git clone https://github.com/Kkartik14/IBM_SpamDetector.git
+   cd IBM_SpamDetector
    ```
 
 2. **Install dependencies**
