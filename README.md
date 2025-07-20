@@ -145,8 +145,8 @@ The system uses the [SpamAssassin Public Corpus](https://spamassassin.apache.org
 ## Development Timeline
 
 - **June 20, 2025**: Initial model training and dependencies
+- **June 28, 2025**: Model training completed for spam detection with >97% accuracy
 - **July 8, 2025**: Web interface implementation
-- **August 15, 2025**: Updated to email spam detection
 
 ## License
 
